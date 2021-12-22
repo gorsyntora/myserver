@@ -1,0 +1,17 @@
+
+var express = require('express')
+var app = express()
+
+app.get('/', function (req, res) {
+res.sendfi
+//  res.send('root server myserver')
+})
+
+
+app.listen(3000, async () => {
+  console.log('Server ready!')
+   // const mongoConnection = await mongoose.connect('mongodb://localhost/nodejs-auth');
+//  console.log('Database ready!')
+
+  console.log('Listening on port 3000')
+})
