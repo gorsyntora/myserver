@@ -1,0 +1,6 @@
+.nav {
+	display: inline-block; /*Задаем блочно-строчное отображение*/
+  /*	width: 180px; /*задаем ширину блока*/
+	background: dodgerblue;
+    border:  2px solid Green;
+        }

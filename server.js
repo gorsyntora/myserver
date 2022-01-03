@@ -1,7 +1,11 @@
 var express = require('express')
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var mongoose = require('mongoose');
+const myMongo = require('./mongo.js');
+
+var val = myMongo.ocrm();
+
+
 const MongoClient = require('mongodb').MongoClient;
 var app = express()
 
@@ -27,6 +31,9 @@ app.use(function (req, res, next) {
   next();
 }
 )
+app.use(express.static(__dirname + '/'));
+
+// Routes for web server
 
 app.get('/app', function (req, res) {
   console.log('get app');
@@ -48,48 +55,16 @@ app.post('/', (req, res) => {
 }
 )
 
+app.post('/add', (req, res) => {
+  console.log('post session adress add:  ' + JSON.stringify(req.body, null, 4));
+}
+)
+
+
 app.listen(3000, async () => {
   console.log('Server ready!')
-  await ocrm();
+  myMongo.add();
+  await val;
 
   console.log('Listening on port 3000')
 })
-
-function ocrm() {
-  const mongoConnection = mongoose.connect('mongodb://localhost/myserver');
-  var db = mongoose.connection;
-
-  db.on('error', console.error.bind(console, 'connection error:'));
-
-  db.once('open', function () {
-    console.log("Connection Successful!");
-  });
-
-  const bookSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    author: String,
-    isbn: { type: String, unique: true },
-    created: { type: Date, default: Date.now }
-
-  });
-  const Book = mongoose.model('Book', bookSchema, "books");
-  const book = new Book({
-    name: 'Introduction to express.js',
-    author: 'Atta',
-    isbn: 'ABL-4511'
-  });
-
-  book.save()
-    .then(book => {
-      console.log(book);
-    }).catch(err => {
-      console.log(err);
-    });
-
- Book.exists ({ isbn: "ABL-4588" }, function (err, result){
-
-console.log(result);
-});
-
-    }
-
