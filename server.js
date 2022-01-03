@@ -70,12 +70,13 @@ function ocrm() {
     author: String,
     isbn: { type: String, unique: true },
     created: { type: Date, default: Date.now }
+
   });
-  const Book = mongoose.model('Book', bookSchema);
+  const Book = mongoose.model('Book', bookSchema, "books");
   const book = new Book({
-    name: 'Introduction to Node.js',
+    name: 'Introduction to express.js',
     author: 'Atta',
-    isbn: 'ABL-4566'
+    isbn: 'ABL-4511'
   });
 
   book.save()
@@ -85,4 +86,10 @@ function ocrm() {
       console.log(err);
     });
 
-}
+ Book.exists ({ isbn: "ABL-4588" }, function (err, result){
+
+console.log(result);
+});
+
+    }
+
