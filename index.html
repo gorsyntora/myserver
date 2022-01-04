@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title> Node terminal</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  
+  <style>
+    body {
+      padding-top: 50px;
+    }
+  </style>
+</head>
+
+<body class="container" >
+
+  <div class="jumbotron">
+    <h> Just login</h>
+  </div>
+  <h2>HTML Forms</h2>
+
+<div>
+
+  <form action="/" method="post" class = nav>
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" value="John"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" value="Doe"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <form action="/add" method="post" class=nav>
+    <label for="title">TITLE:</label><br>
+    <input type="text" id ="title" name="title" value="Jane Aire"><br>
+    <label for="author"> AUTHOR :</label><br>
+    <input type="text" id="author" name="author" value="Charlotte Bronte"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+<div> Reloaded from server </div>
+</body>
+
+</html>
