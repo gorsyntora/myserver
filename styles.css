@@ -3,4 +3,9 @@
   /*	width: 180px; /*задаем ширину блока*/
 	background: dodgerblue;
     border:  2px solid Green;
+    margin-left: 25%;
         }
+
+
+        body{padding-top:20px;}
+              

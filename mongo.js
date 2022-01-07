@@ -8,6 +8,8 @@ const bookSchema = new mongoose.Schema({
 
 });
 
+const Book = mongoose.model('Book', bookSchema, "books");
+
 module.exports = {
    
     add: function() {
@@ -23,13 +25,13 @@ module.exports = {
         db.once('open', function () {
             console.log("Connection Successful!");
         });
-
+ 
       
-        const Book = mongoose.model('Book', bookSchema, "books");
+       
         const book = new Book({
             name: 'Introduction to express.js',
             author: 'Atta',
-            isbn: 'ABL-4522'
+            isbn: 'ABL-45322'
         });
 
         book.save()
@@ -39,10 +41,10 @@ module.exports = {
                 console.log(err);
             });
 
-        Book.exists({ isbn: "ABL-4521" }, function (err, result) {
-
+     Book.exists({ isbn: "ABL-4521" }, function (err, result) {
             console.log("Search result is :: "+ result);
         });
+
 
     }
 }
