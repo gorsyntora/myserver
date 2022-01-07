@@ -10,11 +10,12 @@ var app = express()
 
 app.use(session({
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   secret: '12345'
-
 })
 );
+
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -23,8 +24,10 @@ app.use(bodyParser.json())
 
 app.use(function (req, res, next) {
 
-if (req.session.userId===undefined&req.originalUrl!='/login') res.redirect('/login');
- // req.session.counter = req.session.counter || 0;
+console.log('midleware  token:  ' + JSON.stringify(req.session.userId, null, 4)); 
+//if (req.session.userId === undefined&req.originalUrl != '/login') res.redirect('/login');
+
+// req.session.counter = req.session.counter || 0;
  // req.session.counter += 1;
  //console.log('midleware  token:  ' + JSON.stringify(req.originalUrl, null, 4));
  //console.log('midleware  token:  ' + JSON.stringify(req.session.userId, null, 4));
@@ -43,7 +46,7 @@ app.get('/app', function (req, res) {
 
 app.get('/', function (req, res) {
   console.log('get route');
-  res.sendfile('index.html')
+  res.sendfile('./dist/petstore/index.html')
   //  res.send('root server myserver')
 })
 
@@ -82,8 +85,14 @@ app.post('/login', async (req, res) => {
  // console.log('post session adress add:  ' + JSON.stringify(req.body, null, 4));
   var checked = await users.checkUser(req.body.email);
  if (checked !== null)  {
-   if (checked.password === req.body.password) 
-  res.send(' Logging in succesed:: '+ JSON.stringify(checked.password, null, 4));  else
+   if (checked.password === req.body.password) {
+ req.session.userId = 202201;    
+ res.redirect('/');
+
+ // res.send(' Logging in succesed:: '+ JSON.stringify(checked.password, null, 4));  
+
+
+} else
   res.send(' Wrong password, please try again later:: '+ JSON.stringify(checked.password, null, 4)); 
  }
  // var logstr = checked.then((result)=>{
